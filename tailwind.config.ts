@@ -26,7 +26,9 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					foreground: 'hsl(var(--primary-foreground))',
+					hover: 'hsl(var(--primary-hover))',
+					glow: 'hsl(var(--primary-glow))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -42,7 +44,21 @@ export default {
 				},
 				accent: {
 					DEFAULT: 'hsl(var(--accent))',
-					foreground: 'hsl(var(--accent-foreground))'
+					foreground: 'hsl(var(--accent-foreground))',
+					hover: 'hsl(var(--accent-hover))',
+					glow: 'hsl(var(--accent-glow))'
+				},
+				deals: {
+					DEFAULT: 'hsl(var(--deals))',
+					foreground: 'hsl(var(--deals-foreground))',
+					hover: 'hsl(var(--deals-hover))',
+					glow: 'hsl(var(--deals-glow))'
+				},
+				ai: {
+					DEFAULT: 'hsl(var(--ai))',
+					foreground: 'hsl(var(--ai-foreground))',
+					hover: 'hsl(var(--ai-hover))',
+					glow: 'hsl(var(--ai-glow))'
 				},
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',
