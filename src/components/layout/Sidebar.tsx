@@ -1,4 +1,5 @@
 import { User } from '@supabase/supabase-js';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { 
@@ -16,13 +17,15 @@ interface SidebarProps {
 }
 
 export const Sidebar = ({ user }: SidebarProps) => {
+  const location = useLocation();
+  
   const menuItems = [
-    { icon: List, label: "My Lists", active: true },
-    { icon: ShoppingBag, label: "Smart Deals", badge: "3" },
-    { icon: TrendingDown, label: "Price Tracker", badge: "2" },
-    { icon: Bell, label: "Alerts" },
-    { icon: Sparkles, label: "AI Assistant" },
-    { icon: Users, label: "Shared Lists" },
+    { icon: List, label: "My Lists", path: "/dashboard", badge: null },
+    { icon: ShoppingBag, label: "Smart Deals", path: "/dashboard/deals", badge: "3" },
+    { icon: TrendingDown, label: "Price Tracker", path: "/dashboard/price-tracker", badge: "2" },
+    { icon: Bell, label: "Alerts", path: "/dashboard/alerts", badge: null },
+    { icon: Sparkles, label: "AI Assistant", path: "/dashboard/ai-assistant", badge: null },
+    { icon: Users, label: "Shared Lists", path: "/dashboard/shared-lists", badge: null },
   ];
 
   return (
@@ -39,16 +42,19 @@ export const Sidebar = ({ user }: SidebarProps) => {
           {menuItems.map((item) => (
             <Button
               key={item.label}
-              variant={item.active ? "default" : "ghost"}
+              variant={location.pathname === item.path ? "default" : "ghost"}
               className="w-full justify-start"
+              asChild
             >
-              <item.icon className="mr-3 h-4 w-4" />
-              {item.label}
-              {item.badge && (
-                <span className="ml-auto bg-deals text-deals-foreground text-xs px-2 py-1 rounded-full">
-                  {item.badge}
-                </span>
-              )}
+              <Link to={item.path}>
+                <item.icon className="mr-3 h-4 w-4" />
+                {item.label}
+                {item.badge && (
+                  <span className="ml-auto bg-deals text-deals-foreground text-xs px-2 py-1 rounded-full">
+                    {item.badge}
+                  </span>
+                )}
+              </Link>
             </Button>
           ))}
         </nav>
