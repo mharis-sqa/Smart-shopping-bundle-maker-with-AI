@@ -9,7 +9,9 @@ import {
   Bell, 
   Sparkles, 
   Users,
-  Plus
+  Plus,
+  UserCircle,
+  Settings
 } from "lucide-react";
 
 interface SidebarProps {
@@ -26,6 +28,8 @@ export const Sidebar = ({ user }: SidebarProps) => {
     { icon: Bell, label: "Alerts", path: "/dashboard/alerts", badge: null },
     { icon: Sparkles, label: "AI Assistant", path: "/dashboard/ai-assistant", badge: null },
     { icon: Users, label: "Shared Lists", path: "/dashboard/shared-lists", badge: null },
+    { icon: UserCircle, label: "Profile", path: "/dashboard/profile", badge: null },
+    { icon: Settings, label: "Settings", path: "/dashboard/settings", badge: null },
   ];
 
   return (

@@ -3,6 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { User, Session } from '@supabase/supabase-js';
 import { Helmet } from "react-helmet-async";
 import { MainLayout } from "@/components/layout/MainLayout";
+import { LandingNavbar } from "@/components/layout/LandingNavbar";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { HowItWorksSection } from "@/components/sections/HowItWorksSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
@@ -66,6 +67,7 @@ const Index = () => {
           <link rel="canonical" href="https://smartbundle.com" />
         </Helmet>
         <div className="min-h-screen bg-gradient-to-br from-background to-secondary">
+          <LandingNavbar />
           <HeroSection />
           <div id="how-it-works">
             <HowItWorksSection />

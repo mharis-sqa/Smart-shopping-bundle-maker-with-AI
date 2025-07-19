@@ -14,6 +14,11 @@ import { AlertsPage } from "./pages/AlertsPage";
 import { AIAssistantPage } from "./pages/AIAssistantPage";
 import { SharedListsPage } from "./pages/SharedListsPage";
 import { UserProfilePage } from "./pages/UserProfilePage";
+import { SettingsPage } from "./pages/SettingsPage";
+import { OpenListPage } from "./pages/OpenListPage";
+import { EditListPage } from "./pages/EditListPage";
+import { DeleteListPage } from "./pages/DeleteListPage";
+import { ListSharingPage } from "./pages/ListSharingPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +41,11 @@ const App = () => (
             <Route path="/dashboard/ai-assistant" element={<RequireAuth><AIAssistantPage /></RequireAuth>} />
             <Route path="/dashboard/shared-lists" element={<RequireAuth><SharedListsPage /></RequireAuth>} />
             <Route path="/dashboard/profile" element={<RequireAuth><UserProfilePage /></RequireAuth>} />
+            <Route path="/dashboard/settings" element={<RequireAuth><SettingsPage /></RequireAuth>} />
+            <Route path="/dashboard/lists/:listId" element={<RequireAuth><OpenListPage /></RequireAuth>} />
+            <Route path="/dashboard/lists/:listId/edit" element={<RequireAuth><EditListPage /></RequireAuth>} />
+            <Route path="/dashboard/lists/:listId/delete" element={<RequireAuth><DeleteListPage /></RequireAuth>} />
+            <Route path="/dashboard/lists/:listId/share" element={<RequireAuth><ListSharingPage /></RequireAuth>} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
