@@ -1,12 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Link } from "react-router-dom";
 import { 
   ShoppingCart, 
   Brain, 
   TrendingDown, 
   Users, 
   Sparkles,
-  Target
+  Target,
+  ArrowRight
 } from "lucide-react";
 
 export const HeroSection = () => {
@@ -56,12 +58,17 @@ export const HeroSection = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-            <Button size="lg" className="text-lg px-8">
-              <Sparkles className="mr-2 h-5 w-5" />
-              Get Started Free
+            <Button asChild size="lg" className="text-lg px-8 shadow-[var(--shadow-glow)] hover:shadow-lg transition-all duration-300">
+              <Link to="/signup">
+                <Sparkles className="mr-2 h-5 w-5" />
+                Start Saving Now
+              </Link>
             </Button>
-            <Button size="lg" variant="outline" className="text-lg px-8">
-              See How It Works
+            <Button asChild size="lg" variant="outline" className="text-lg px-8 hover:bg-secondary/50 transition-all duration-300">
+              <a href="#how-it-works">
+                See How It Works
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </a>
             </Button>
           </div>
         </div>

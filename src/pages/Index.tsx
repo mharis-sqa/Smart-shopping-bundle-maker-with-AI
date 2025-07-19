@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
 import { supabase } from "@/integrations/supabase/client";
 import { User, Session } from '@supabase/supabase-js';
+import { Helmet } from "react-helmet-async";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { HowItWorksSection } from "@/components/sections/HowItWorksSection";
+import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
+import { PricingSection } from "@/components/sections/PricingSection";
+import { FooterSection } from "@/components/sections/FooterSection";
 import { DashboardView } from "@/components/dashboard/DashboardView";
-import { AuthPage } from "@/components/auth/AuthPage";
 import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
@@ -50,10 +54,31 @@ const Index = () => {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-background to-secondary">
-        <HeroSection />
-        <AuthPage />
-      </div>
+      <>
+        <Helmet>
+          <title>SmartBundle - AI-Powered Smart Shopping Lists & Deal Aggregator</title>
+          <meta name="description" content="Build intelligent shopping lists, track prices across platforms, and get AI-powered recommendations for better deals and healthier choices. Start saving money today!" />
+          <meta name="keywords" content="smart shopping lists, AI deals, price tracking, shopping assistant, save money, deal aggregator" />
+          <meta property="og:title" content="SmartBundle - AI-Powered Smart Shopping Lists" />
+          <meta property="og:description" content="Build intelligent shopping lists, track prices across platforms, and get AI-powered recommendations for better deals." />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="https://smartbundle.com" />
+          <link rel="canonical" href="https://smartbundle.com" />
+        </Helmet>
+        <div className="min-h-screen bg-gradient-to-br from-background to-secondary">
+          <HeroSection />
+          <div id="how-it-works">
+            <HowItWorksSection />
+          </div>
+          <div id="features">
+            <TestimonialsSection />
+          </div>
+          <div id="pricing">
+            <PricingSection />
+          </div>
+          <FooterSection />
+        </div>
+      </>
     );
   }
 
