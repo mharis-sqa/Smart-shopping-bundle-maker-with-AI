@@ -80,38 +80,48 @@ export const SharedListsPage = () => {
         <link rel="canonical" href={`${window.location.origin}/dashboard/shared-lists`} />
       </Helmet>
 
-      <div className="space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div>
-            <h1 className="text-3xl font-bold">Shared Lists</h1>
-            <p className="text-muted-foreground">Collaborate on shopping lists with family and friends</p>
+      <div className="max-w-7xl mx-auto space-y-8">
+        {/* Header Section */}
+        <div className="flex flex-col space-y-4 lg:flex-row lg:items-center lg:justify-between lg:space-y-0">
+          <div className="space-y-2">
+            <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              Shared Lists
+            </h1>
+            <p className="text-lg text-muted-foreground max-w-2xl">
+              Collaborate seamlessly on shopping lists with family, friends, and colleagues
+            </p>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="relative">
+          
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <div className="relative min-w-[280px]">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder="Search shared lists..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 w-full sm:w-64"
+                className="pl-10 h-11 bg-background/60 backdrop-blur-sm border-border/50 focus:border-primary/50 focus:bg-background transition-all"
               />
             </div>
-            <Button>
+            <Button size="default" className="h-11 px-6 font-semibold">
               <Plus className="h-4 w-4 mr-2" />
               Share List
             </Button>
           </div>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Shared Lists</CardTitle>
-              <Users className="h-4 w-4 text-muted-foreground" />
+        {/* Collaboration Stats */}
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <Card className="relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+              <CardTitle className="text-sm font-semibold text-muted-foreground">Total Shared Lists</CardTitle>
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <Users className="h-5 w-5 text-primary" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{sharedLists.length}</div>
-              <p className="text-xs text-muted-foreground">Active collaborations</p>
+              <div className="text-3xl font-bold">{sharedLists.length}</div>
+              <p className="text-sm text-muted-foreground mt-1">Active collaborations</p>
             </CardContent>
           </Card>
 
@@ -155,11 +165,12 @@ export const SharedListsPage = () => {
           </Card>
         </div>
 
-        <Tabs defaultValue="all" className="space-y-4">
-          <TabsList>
-            <TabsTrigger value="all">All Lists</TabsTrigger>
-            <TabsTrigger value="owned">Owned by Me</TabsTrigger>
-            <TabsTrigger value="shared">Shared with Me</TabsTrigger>
+        {/* Shared Lists */}
+        <Tabs defaultValue="all" className="space-y-6">
+          <TabsList className="grid w-full max-w-lg mx-auto grid-cols-3 h-12 p-1">
+            <TabsTrigger value="all" className="text-sm font-medium">All Lists</TabsTrigger>
+            <TabsTrigger value="owned" className="text-sm font-medium">Owned by Me</TabsTrigger>
+            <TabsTrigger value="shared" className="text-sm font-medium">Shared with Me</TabsTrigger>
           </TabsList>
 
           <TabsContent value="all" className="space-y-4">

@@ -91,79 +91,99 @@ export const AlertsPage = () => {
         <link rel="canonical" href={`${window.location.origin}/dashboard/alerts`} />
       </Helmet>
 
-      <div className="space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div>
-            <h1 className="text-3xl font-bold">Price Alerts</h1>
-            <p className="text-muted-foreground">Manage your notifications and price tracking alerts</p>
+      <div className="max-w-7xl mx-auto space-y-8">
+        {/* Header Section */}
+        <div className="flex flex-col space-y-4 lg:flex-row lg:items-center lg:justify-between lg:space-y-0">
+          <div className="space-y-2">
+            <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              Price Alerts
+            </h1>
+            <p className="text-lg text-muted-foreground max-w-2xl">
+              Stay informed with smart notifications for price drops and product availability
+            </p>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="relative">
+          
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <div className="relative min-w-[280px]">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Search alerts..."
+                placeholder="Search alerts and products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 w-full sm:w-64"
+                className="pl-10 h-11 bg-background/60 backdrop-blur-sm border-border/50 focus:border-primary/50 focus:bg-background transition-all"
               />
             </div>
-            <Button>
+            <Button size="default" className="h-11 px-6 font-semibold">
               <Plus className="h-4 w-4 mr-2" />
-              New Alert
+              Create Alert
             </Button>
           </div>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Active Alerts</CardTitle>
-              <Bell className="h-4 w-4 text-muted-foreground" />
+        {/* Alert Stats */}
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <Card className="relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+              <CardTitle className="text-sm font-semibold text-muted-foreground">Active Alerts</CardTitle>
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <Bell className="h-5 w-5 text-primary" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{alerts.filter(a => a.isActive).length}</div>
-              <p className="text-xs text-muted-foreground">Currently monitoring</p>
+              <div className="text-3xl font-bold">{alerts.filter(a => a.isActive).length}</div>
+              <p className="text-sm text-muted-foreground mt-1">Currently monitoring</p>
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Triggered Today</CardTitle>
-              <TrendingDown className="h-4 w-4 text-deals" />
+          <Card className="relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-deals/5 to-transparent" />
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+              <CardTitle className="text-sm font-semibold text-muted-foreground">Triggered Today</CardTitle>
+              <div className="p-2 bg-deals/10 rounded-lg">
+                <TrendingDown className="h-5 w-5 text-deals" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-deals">2</div>
-              <p className="text-xs text-muted-foreground">Price drops detected</p>
+              <div className="text-3xl font-bold text-deals">2</div>
+              <p className="text-sm text-muted-foreground mt-1">Price drops detected</p>
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Alerts</CardTitle>
-              <Bell className="h-4 w-4 text-muted-foreground" />
+          <Card className="relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent" />
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+              <CardTitle className="text-sm font-semibold text-muted-foreground">Total Alerts</CardTitle>
+              <div className="p-2 bg-accent/10 rounded-lg">
+                <Bell className="h-5 w-5 text-accent" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{alerts.length}</div>
-              <p className="text-xs text-muted-foreground">All time created</p>
+              <div className="text-3xl font-bold">{alerts.length}</div>
+              <p className="text-sm text-muted-foreground mt-1">All time created</p>
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Savings Alert</CardTitle>
-              <TrendingDown className="h-4 w-4 text-deals" />
+          <Card className="relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-deals/5 to-transparent" />
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+              <CardTitle className="text-sm font-semibold text-muted-foreground">Potential Savings</CardTitle>
+              <div className="p-2 bg-deals/10 rounded-lg">
+                <TrendingDown className="h-5 w-5 text-deals" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-deals">$149.98</div>
-              <p className="text-xs text-muted-foreground">Potential savings</p>
+              <div className="text-3xl font-bold text-deals">$149.98</div>
+              <p className="text-sm text-muted-foreground mt-1">When targets hit</p>
             </CardContent>
           </Card>
         </div>
 
-        <Tabs defaultValue="alerts" className="space-y-4">
-          <TabsList>
-            <TabsTrigger value="alerts">My Alerts</TabsTrigger>
-            <TabsTrigger value="settings">Notification Settings</TabsTrigger>
+        {/* Alerts Management */}
+        <Tabs defaultValue="alerts" className="space-y-6">
+          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 h-12 p-1">
+            <TabsTrigger value="alerts" className="text-sm font-medium">My Alerts</TabsTrigger>
+            <TabsTrigger value="settings" className="text-sm font-medium">Notification Settings</TabsTrigger>
           </TabsList>
 
           <TabsContent value="alerts" className="space-y-4">

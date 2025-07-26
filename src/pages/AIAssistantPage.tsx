@@ -93,68 +93,111 @@ export const AIAssistantPage = () => {
         <link rel="canonical" href={`${window.location.origin}/dashboard/ai-assistant`} />
       </Helmet>
 
-      <div className="space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div>
-            <h1 className="text-3xl font-bold">AI Shopping Assistant</h1>
-            <p className="text-muted-foreground">Get personalized advice and optimize your shopping experience</p>
+      <div className="max-w-7xl mx-auto space-y-8">
+        {/* Header Section */}
+        <div className="flex flex-col space-y-4 lg:flex-row lg:items-center lg:justify-between lg:space-y-0">
+          <div className="space-y-2">
+            <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-ai to-primary bg-clip-text text-transparent">
+              AI Shopping Assistant
+            </h1>
+            <p className="text-lg text-muted-foreground max-w-2xl">
+              Get personalized advice, smart recommendations, and optimize your shopping experience with AI
+            </p>
           </div>
-          <Button variant="outline">
+          
+          <Button variant="outline" size="default" className="h-11 px-6">
             <History className="h-4 w-4 mr-2" />
             Chat History
           </Button>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-4">
+        {/* Chat Interface */}
+        <div className="grid gap-8 lg:grid-cols-4">
           <div className="lg:col-span-3">
-            <Card className="h-[600px] flex flex-col">
-              <CardHeader className="pb-3">
-                <CardTitle className="flex items-center gap-2">
-                  <Sparkles className="h-5 w-5 text-primary" />
-                  Chat with AI Assistant
+            <Card className="h-[700px] flex flex-col border-0 bg-gradient-to-br from-background to-background/50 backdrop-blur-sm shadow-xl">
+              <CardHeader className="pb-4 border-b bg-gradient-to-r from-ai/5 to-primary/5">
+                <CardTitle className="flex items-center gap-3">
+                  <div className="p-2 bg-ai/10 rounded-lg">
+                    <Sparkles className="h-6 w-6 text-ai" />
+                  </div>
+                  <div>
+                    <div className="text-xl font-bold">AI Shopping Assistant</div>
+                    <div className="text-sm text-muted-foreground font-normal">
+                      Powered by advanced AI • Ready to help
+                    </div>
+                  </div>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="flex-1 flex flex-col">
-                <div className="flex-1 overflow-y-auto space-y-4 mb-4">
+              
+              <CardContent className="flex-1 flex flex-col p-0">
+                {/* Messages Area */}
+                <div className="flex-1 overflow-y-auto p-6 space-y-6">
                   {messages.map((message) => (
                     <div
                       key={message.id}
                       className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
                     >
-                      <div
-                        className={`max-w-[80%] rounded-lg p-4 ${
-                          message.type === 'user'
-                            ? 'bg-primary text-primary-foreground'
-                            : 'bg-muted'
-                        }`}
-                      >
-                        <p className="text-sm">{message.content}</p>
-                        {message.suggestions && (
-                          <div className="mt-3 flex flex-wrap gap-2">
-                            {message.suggestions.map((suggestion, index) => (
-                              <Badge
-                                key={index}
-                                variant="secondary"
-                                className="cursor-pointer hover:bg-secondary/80"
-                                onClick={() => handleSuggestionClick(suggestion)}
-                              >
-                                {suggestion}
-                              </Badge>
-                            ))}
+                      <div className={`max-w-[85%] ${message.type === 'user' ? 'order-1' : 'order-2'}`}>
+                        {message.type === 'assistant' && (
+                          <div className="flex items-center gap-2 mb-2">
+                            <div className="w-8 h-8 bg-gradient-to-r from-ai to-primary rounded-full flex items-center justify-center">
+                              <Sparkles className="h-4 w-4 text-white" />
+                            </div>
+                            <span className="text-sm font-medium text-ai">AI Assistant</span>
                           </div>
                         )}
-                        <p className="text-xs opacity-70 mt-2">
-                          {message.timestamp.toLocaleTimeString()}
-                        </p>
+                        
+                        <div
+                          className={`rounded-2xl p-4 shadow-sm ${
+                            message.type === 'user'
+                              ? 'bg-gradient-to-r from-primary to-primary/90 text-primary-foreground ml-4'
+                              : 'bg-gradient-to-r from-muted to-muted/50 mr-4'
+                          }`}
+                        >
+                          <p className="text-sm leading-relaxed">{message.content}</p>
+                          
+                          {message.suggestions && (
+                            <div className="mt-4 flex flex-wrap gap-2">
+                              {message.suggestions.map((suggestion, index) => (
+                                <Button
+                                  key={index}
+                                  variant="secondary"
+                                  size="sm"
+                                  className="text-xs h-8 px-3 cursor-pointer hover:bg-secondary/80 transition-colors"
+                                  onClick={() => handleSuggestionClick(suggestion)}
+                                >
+                                  {suggestion}
+                                </Button>
+                              ))}
+                            </div>
+                          )}
+                          
+                          <p className="text-xs opacity-70 mt-3">
+                            {message.timestamp.toLocaleTimeString()}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   ))}
+                  
                   {isLoading && (
                     <div className="flex justify-start">
-                      <div className="bg-muted rounded-lg p-4">
-                        <div className="flex items-center gap-2">
-                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary"></div>
-                          <span className="text-sm">AI is thinking...</span>
+                      <div className="max-w-[85%]">
+                        <div className="flex items-center gap-2 mb-2">
+                          <div className="w-8 h-8 bg-gradient-to-r from-ai to-primary rounded-full flex items-center justify-center">
+                            <Sparkles className="h-4 w-4 text-white" />
+                          </div>
+                          <span className="text-sm font-medium text-ai">AI Assistant</span>
+                        </div>
+                        <div className="bg-gradient-to-r from-muted to-muted/50 rounded-2xl p-4 mr-4">
+                          <div className="flex items-center gap-3">
+                            <div className="animate-pulse flex space-x-1">
+                              <div className="w-2 h-2 bg-ai rounded-full animate-bounce"></div>
+                              <div className="w-2 h-2 bg-ai rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                              <div className="w-2 h-2 bg-ai rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                            </div>
+                            <span className="text-sm text-muted-foreground">AI is thinking...</span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -162,20 +205,36 @@ export const AIAssistantPage = () => {
                   <div ref={messagesEndRef} />
                 </div>
 
-                <div className="flex items-center gap-2">
-                  <Input
-                    placeholder="Ask me anything about shopping, deals, or products..."
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                    onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                    className="flex-1"
-                  />
-                  <Button size="icon" variant="outline">
-                    <Mic className="h-4 w-4" />
-                  </Button>
-                  <Button onClick={handleSendMessage} disabled={!inputValue.trim() || isLoading}>
-                    <Send className="h-4 w-4" />
-                  </Button>
+                {/* Input Area */}
+                <div className="p-6 border-t bg-gradient-to-r from-background to-muted/20">
+                  <div className="flex items-center gap-3">
+                    <div className="flex-1 relative">
+                      <Input
+                        placeholder="Ask me anything about shopping, deals, or products..."
+                        value={inputValue}
+                        onChange={(e) => setInputValue(e.target.value)}
+                        onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                        className="h-12 pr-12 bg-background/60 backdrop-blur-sm border-border/50 focus:border-ai/50 focus:bg-background transition-all"
+                      />
+                      <Button 
+                        size="icon" 
+                        variant="ghost" 
+                        className="absolute right-1 top-1 h-10 w-10 hover:bg-ai/10"
+                      >
+                        <Mic className="h-4 w-4 text-muted-foreground" />
+                      </Button>
+                    </div>
+                    
+                    <Button 
+                      onClick={handleSendMessage} 
+                      disabled={!inputValue.trim() || isLoading}
+                      size="default"
+                      className="h-12 px-6 bg-gradient-to-r from-ai to-primary hover:from-ai/90 hover:to-primary/90 font-semibold"
+                    >
+                      <Send className="h-4 w-4 mr-2" />
+                      Send
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
